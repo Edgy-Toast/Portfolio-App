@@ -11,18 +11,19 @@ export default class ApiStack extends sst.Stack {
 
         // Create the API
         this.api = new sst.Api(this, "Api", {
-        defaultFunctionProps: {
-            environment: {
-            TABLE_NAME: table.tableName,
+            defaultAuthorizationType: "AWS_IAM",
+            defaultFunctionProps: {
+                environment: {
+                TABLE_NAME: table.tableName,
+                },
             },
-        },
-        routes: {
-            "GET /notes": "src/list.main",
-            "POST /notes": "src/create.main",
-            "GET /notes/{id}": "src/get.main",
-            "PUT /notes/{id}": "src/update.main",
-            "DELETE /notes/{id}": "src/delete.main",
-        },
+            routes: {
+                "GET /notes": "src/list.main",
+                "POST /notes": "src/create.main",
+                "GET /notes/{id}": "src/get.main",
+                "PUT /notes/{id}": "src/update.main",
+                "DELETE /notes/{id}": "src/delete.main",
+            },
         });
 
         // Allow the API to access the table
